@@ -3,8 +3,8 @@
 #include <ESPAsyncWebServer.h>
 
 // Replace with your network credentials
-const char* ssid = "Galaxy A02df04";
-const char* password = "kcoh8507";
+const char* ssid = "AndroidAP9FF1";
+const char* password = "edmund12";
 
 String sliderValue = "0";
 
@@ -202,21 +202,21 @@ font-size: xx-large;">
 
 // motor setup pin outs
 // motor b right
-#define input1 19 // in4
-#define input2 21 // in3
+#define input1 13 // in4
+#define input2 12 // in3
 #define speed1 14 // enb
 
 
 // motor a left
-#define input3  16 //in1
-#define input4  17 //in2
-#define speed2  18 //ena
+#define input3  18 //in1
+#define input4  19 //in2
+#define speed2  21 //ena
 
 int right_speed =0; // right and left speed of the various motors
 int left_speed =0;
 void setup(){
   // Serial port for debugging purposes
-  //Serial.begin(115200);
+  Serial.begin(115200);
   // setup pin modes and pwm channels
   pinMode(input1,OUTPUT);
   pinMode(input2,OUTPUT);
@@ -234,12 +234,12 @@ void setup(){
   while (WiFi.status() != WL_CONNECTED) {
     delay(1000);
     digitalWrite(2, HIGH);
-    //Serial.println("Connecting to WiFi..");
+    Serial.println("Connecting to WiFi..");
   }
   digitalWrite(2, LOW);
 
   // Print ESP Local IP Address
-  //Serial.println(WiFi.localIP());
+  Serial.println(WiFi.localIP());
 
   // Route for root / web page
   server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
@@ -255,10 +255,10 @@ void setup(){
       sliderValue = inputMessage;
       
       setspeeds();
-      //Serial.print("left speed: ");
-      //Serial.println(left_speed);
-      //Serial.print("right speed: ");
-      //Serial.println(right_speed);
+      Serial.print("left speed: ");
+      Serial.println(left_speed);
+      Serial.print("right speed: ");
+      Serial.println(right_speed);
       ledcWrite(ledChannel, right_speed);
       ledcWrite(ledChannel2, left_speed);
     }else {
@@ -286,7 +286,8 @@ void stopp(int front,int back){
    digitalWrite(front,LOW);
   digitalWrite(back,LOW); 
 }
-void setspeeds(){
+void setspeeds()
+{
   // read the values received from web page
   int comma1 = sliderValue.indexOf(',');
   String part2 = sliderValue.substring(comma1+1);
@@ -296,7 +297,7 @@ void setspeeds(){
   int speeed=part2.substring(comma2+1).toInt();
   //Serial.println("xpo:"+sliderValue.substring(0,comma1));
   //Serial.println("ypo:"+part2.substring(0,comma2));
-  speeed = speeed*255/100;
+  
    // move back when joystick moves back
   if(y<0)
   {
@@ -315,19 +316,65 @@ void setspeeds(){
     speeed = 0;
   }
   // control the direction of the robot by varyuing the speed of the left and right wheels
-  if(x!= 0 && y!= 0){
-    if(x>0){
-      //turn right
-      left_speed = 200+(speeed*(x+abs(y))/100)/255;
-      right_speed = 200+(speeed*(abs(y))/100)/255;
-    }else if(x<0){
-      // turn left
-      left_speed = 200+speeed*(abs(y))/100/255;
-      right_speed = 200+speeed*(abs(x)+abs(y))/100/255;
-    }else{
-      // move straight
-       left_speed = 200+speeed*(abs(y))/50/255;
-       right_speed = 200+speeed*(abs(y))/50/255;
-    }  
+  if(x!= 0 && y!= 0)
+  {
+    if (y>0)
+    {
+      if(x>0){
+      //turn front right
+        right_speed =200+ abs(y)*55/100;
+        left_speed = 200+(abs(y)+abs(x))*55/100;
+        
+      }
+      else if(x<0){
+      // turn front left
+        left_speed =200+ abs(y)*55/100;
+        right_speed = 200+(abs(y)+abs(x))*55/100;      
+               
+      }
+    }
+    if(y<0)    
+    {
+      if(x>0)
+      {
+      //turn back right
+        right_speed =200+ abs(y)*55/100;
+        left_speed = 200+(abs(y)+abs(x))*55/100;
+     
+      }
+      else if(x<0)
+      {
+      // turn back left
+        left_speed =200+ abs(y)*55/100;
+        right_speed = 200+(abs(y)+abs(x))*55/100;  
+     
+      }    
+    }
   }
-}
+  else if(x==0 && y!=0)
+  {
+  //straight movement    
+    if(y>0 || y<0)
+    {
+      left_speed =200+ abs(y)*55/100;
+      right_speed =200+ abs(y)*55/100;     
+    }        
+  }
+  else
+  {
+      
+    if(x>0)
+    {
+      //hard right
+      right_speed = 0;
+      left_speed = 200+(abs(y)+abs(x))*55/100;  
+    }
+    else if(x<0)
+    {
+      //hard left
+      left_speed = 0;
+      right_speed = 200+(abs(y)+abs(x))*55/100;      
+    }
+        
+  }  
+ }

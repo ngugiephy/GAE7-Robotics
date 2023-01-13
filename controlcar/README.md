@@ -14,14 +14,24 @@ Upon powerup/Activation/Powering, the user should be able to make the robot car 
 For wireless connectivity, an ESP-32 module is used in the robot circuit and the web app runs on any smart device which has internet capability.
 The speed of the robot is varied by simultaneously stepping up the voltage fed into both motors controlling the wheels, whereas direction control is achieved by varying the speeds of the two motors independently.
 
+## Image
+
+![App Screenshot](image/robot.png)
+
+
 ## 🔗 Links
 [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)]([![linkedin](https://www.linkedin.com/posts/ngugi-ephy-2bb549143_i-recently-got-a-group-of-new-students-and-activity-7019269714874875905-XBSZ?utm_source=share&utm_medium=member_android)](https://www.linkedin.com/)
 )
 
 
+
+
+
 ## Documentation
 
 [Documentation](https://docs.google.com/document/d/1LbBDn1WQoOeTC6KhLYoVKVhvR-AN3GxZVUbPAm6KUsI/edit?usp=sharing)
+
+
 
 
 

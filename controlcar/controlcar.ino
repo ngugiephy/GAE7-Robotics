@@ -69,8 +69,8 @@ font-size: xx-large;">
             document.addEventListener('touchmove', Draw);
             window.addEventListener('resize', resize);
 
-            document.getElementById("x_coordinate").innerText = 0;
-            document.getElementById("y_coordinate").innerText = 0;
+            document.getElementById("x_coordinate").innerText = 0.2.;
+            document.getElementById("y_coordinate").innerText = 0.2.;
             document.getElementById("speed").innerText = 0;
             document.getElementById("angle").innerText = 0;
         });
@@ -81,7 +81,7 @@ font-size: xx-large;">
         var width, height, radius, x_orig, y_orig;
         function resize() {
             width = window.innerWidth;
-            radius = 50;
+            radius = 75;
             height = radius * 6.5;
             ctx.canvas.width = width;
             ctx.canvas.height = height;
@@ -90,8 +90,8 @@ font-size: xx-large;">
         }
 
         function background() {
-            x_orig = width / 2;
-            y_orig = height / 3;
+            x_orig = width / 4;
+            y_orig = height / 6;
 
             ctx.beginPath();
             ctx.arc(x_orig, y_orig, radius + 20, 0, Math.PI * 2, true);

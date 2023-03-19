@@ -3,8 +3,8 @@
 #include <ESPAsyncWebServer.h>
 
 // Replace with your network credentials
-const char* ssid = "AndroidAP9FF1";
-const char* password = "edmund12";
+const char* ssid = "Wi-Fi Name.";
+const char* password = "Wi-fi Passcode";
 
 String sliderValue = "0";
 

@@ -1,4 +1,4 @@
-# Gearbox Academy Cohort 7 Robotics Team
+# Gearbox Robotics Team
 
 
 This repo contains various projects conducted by the Cohort 7 Robotics team at Gearbox Academy 2023.

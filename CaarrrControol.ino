@@ -4,8 +4,8 @@
 #include <ESPAsyncWebServer.h>
 
 // Replace with your network credentials
-const char* ssid = "Galaxy";
-const char* password = "menime0*";
+const char* ssid = "Muthomi's note 10";
+const char* password = "12345678";
 
 String sliderValue = "0";
 
